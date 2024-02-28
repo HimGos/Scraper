@@ -7,11 +7,23 @@ let chartData = {
         data: [],
         backgroundColor: function(context) {
             const strength = context.dataset.data[context.dataIndex];
-            return colorMap[strength] || 'gray'; // Default color
+            let color = colorMap[strength] || 'gray'; // Default color
+            // Modify the color string to include an alpha value (transparency)
+            if (color.startsWith('#')) { // Assuming hex color format
+                color += '90'; // Example: Add an alpha value of 0.5 (semi-transparent)
+            } else if (color.startsWith('rgba')) {
+                color = color.replace(/\)$/, ', 0.5)'); // Add opacity for rgba
+            }
+
+            return color;
         },
 
-        borderWidth: 1,
-        borderRadius: 28
+        borderWidth: 3,
+        borderRadius: 18,
+        borderColor: function(context) {
+            const strength = context.dataset.data[context.dataIndex];
+            return colorMap[strength] || 'gray'; // Use the same color as the fill
+            }
     }]
 };
 
@@ -87,10 +99,10 @@ socket.onmessage = function(event) {
 // Update time display every second
 function updateTime() {
     const now = new Date();
-    const formattedTime = now.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    const formattedTime = now.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
     const formattedDate = now.toLocaleDateString('en-US', { month: 'short', day: '2-digit' });
     const timeDisplay = document.getElementById('timeDisplay');
-    timeDisplay.textContent = 'As of:' + ' ' + formattedDate + ' ' + formattedTime + ' GMT(+05:30)';
+    timeDisplay.textContent = 'As of:' + ' ' + formattedDate + ' at ' + formattedTime + ' GMT+5:30';
 }
 
 // Update time display initially and then every second
