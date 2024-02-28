@@ -2,11 +2,26 @@
 <html>
 <head>
   <title>Currency Strength Chart</title>
+  <style>
+    #currencyChart {
+      width: 40%;
+      height: 200px;
+      margin-bottom: 20px; /* Add some margin at the bottom */
+    }
+
+    #timeDisplay {
+      font-family: 'Helvetica', sans-serif;
+      font-weight: bold;
+      text-align: right;
+      color: gray;
+
+    }
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <canvas id="currencyChart"></canvas>
-  <div id="timeDisplay"></div> <!-- Time display element -->
+  <div id="timeDisplay"></div>
   <script src="app.js"></script>
 </body>
 </html>
