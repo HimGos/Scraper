@@ -1,4 +1,4 @@
-const socket = new WebSocket("ws://localhost:5000"); // Connect to your server
+const socket = new WebSocket("ws://0.0.0.0:5000"); // Connect to your server
 
 let chartData = {
     labels: [],
