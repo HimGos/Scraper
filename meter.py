@@ -47,6 +47,7 @@ async def broadcast_currency_updates(websocket, path):
         await asyncio.sleep(60)
 
 if __name__ == "__main__":
+    print("Starting Server...")
     start_server = websockets.serve(broadcast_currency_updates, 'localhost', 5000)
     asyncio.get_event_loop().run_until_complete(start_server)
     asyncio.get_event_loop().run_forever()
